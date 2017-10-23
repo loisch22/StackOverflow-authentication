@@ -25,3 +25,5 @@ Classes:
     - user_id
 - Tags
 - Comments
+
+Code for allowing users to login with email/username: http://techbrij.com/asp-net-core-identity-login-email-username
