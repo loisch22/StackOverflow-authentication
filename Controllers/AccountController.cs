@@ -55,50 +55,7 @@ namespace StackOverflow.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
-			ViewData["ReturnUrl"] = returnUrl;
-			if (model.Email.IndexOf('@') > -1)
-			{
-				//Validate email format
-				string emailRegex = @"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}" +
-									   @"\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\" +
-										  @".)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$";
-				Regex re = new Regex(emailRegex);
-				if (!re.IsMatch(model.Email))
-				{
-					ModelState.AddModelError("Email", "Email is not valid");
-				}
-			}
-			else
-			{
-				//validate Username format
-				string emailRegex = @"^[a-zA-Z0-9]*$";
-				Regex re = new Regex(emailRegex);
-				if (!re.IsMatch(model.Email))
-				{
-					ModelState.AddModelError("Email", "Username is not valid");
-				}
-			}
-
-
-            if(ModelState.IsValid)
-            {
-                var userName = model.Email;
-                if (userName.IndexOf('@') > -1)
-                {
-                    var user = await _userManager.FindByEmailAsync(model.Email);
-                    if (user == null)
-                    {
-                        ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                        return View();
-                    }
-					else
-					{
-						userName = user.UserName;
-					}
-                }
-            }
-
-            Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, isPersistent: true, lockoutOnFailure: false);
+            Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, isPersistent: true, lockoutOnFailure: false);
             if (result.Succeeded)
             {
                 return RedirectToAction("Index");
