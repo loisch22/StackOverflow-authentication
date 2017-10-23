@@ -13,16 +13,16 @@ Classes:
     - question_id
     - title
     - content
-    - user_id
+    - public virtual ApplicationUser User {get;set;} = automatically generated user_id
     - datetime postdate
-    - bool active (if question is answered/not)
+    - bool isClosed (isCloser = starts off active)
 - Answers
     - answer_id
     - content
     - votes (people can click to vote for your answer)
     - datetime postdate
     - question_id
-    - user_id
+    - public virtual ApplicationUser User {get;set;} = automatically generated user_id
 - Tags
 - Comments
 
