@@ -9,6 +9,7 @@ As a user who didn't ask a question, I want to vote on which answer I think is b
 As a user, I want to vote up questions I like, so that awesome questions get displayed higher on the list of questions and on search results.
 
 Classes:
+Start by using this as reference: https://www.learnhowtoprogram.com/net/authentication-and-ajax/integrating-identity-with-entity
 - Questions
     - question_id
     - title
